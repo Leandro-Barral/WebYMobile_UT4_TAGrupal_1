@@ -1,4 +1,4 @@
-import React from 'react';
+/* eslint-disable react/prop-types */
 import Columna from '../Columna'
 
 const ContenedorColumnas = () => {

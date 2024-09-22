@@ -1,13 +1,12 @@
-import React from 'react'
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 import Modal from './components/Modal';
 import Header from './components/Header';
 import ContenedorColumnas from './components/ContendedorColumnas';
 import Boton from './components/Boton';
-import ModoOscuro from './components/ModoOscuro';
+import Tarea from './components/Tarea';
 
 const App = () => {
   const [count, setCount] = useState(0)

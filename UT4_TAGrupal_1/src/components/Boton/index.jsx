@@ -1,4 +1,4 @@
-import React from 'react';
+/* eslint-disable react/prop-types */
 
 const Boton = ({ id, className, children, onClick, type = "button" }) => {
     return (

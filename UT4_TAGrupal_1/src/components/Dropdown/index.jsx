@@ -1,4 +1,4 @@
-import React from 'react';
+/* eslint-disable react/prop-types */
 
 const Dropdown = ({ id, options, required }) => {
   return (

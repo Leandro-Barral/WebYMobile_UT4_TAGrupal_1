@@ -1,4 +1,4 @@
-import React from "react";
+/* eslint-disable react/prop-types */
 import Boton from "../Boton";
 import ModoOscuro from "../ModoOscuro";
 
