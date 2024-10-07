@@ -19,7 +19,7 @@ const Modal = ({ isOpen, onClose }) => {
                         <Input id="task-description" label="Descripción" placeholder="Descripción de la tarea" required type="textarea" />
                         <Dropdown id="task-assigned" options={[{ value: 'Asignado 1', label: 'Asignado 1' }, { value: 'Asignado 2', label: 'Asignado 2' }, { value: 'Asignado 3', label: 'Asignado 3' }]} required />
                         <Dropdown id="task-priority" options={[{ value: 'Alta', label: 'Alta' }, { value: 'Media', label: 'Media' }, { value: 'Baja', label: 'Baja' }]} required />
-                        <Dropdown id="task-state" options={[{ value: 'Backlog', label: 'Backlog' }, { value: 'To Do', label: 'To Do' }, { value: 'In Progress', label: 'In Progress' }, { value: 'Blocked', label: 'Blocked' }, { value: 'Done', label: 'Done' }]} required />
+                        <Dropdown id="task-status" options={[{ value: 'Backlog', label: 'Backlog' }, { value: 'To Do', label: 'To Do' }, { value: 'In Progress', label: 'In Progress' }, { value: 'Blocked', label: 'Blocked' }, { value: 'Done', label: 'Done' }]} required />
                         <Input id="task-due-date" label="Fecha límite" required type="date" />
                         <Boton id="save-task-btn" className="button is-success" type="submit">Guardar</Boton>
                     </form>
