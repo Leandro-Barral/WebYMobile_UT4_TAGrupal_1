@@ -1,42 +1,274 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+:root{
+  --bar-color: rgb(12, 64, 12);
+  --title-color: white;
+  --background-color: #e8e8e8;
+  --font-color: black;
+  --primary-color: rgb(52, 52, 154);
+  --light-background: #efefef;
+  --very-light-background: #f8f8f8;
+  --create-task-button: rgb(17, 144, 17);
+  --create-task-hover: rgb(4, 83, 4);
+  --dark-mode-color: grey;
+  --dark-mode-hover: rgb(177, 188, 177);
+  --delete-btn-color: grey;
+  --delete-btn-hover: red;
+  --drag-over-background: #b5b5b5;
+  --drag-over-border: #00d5c0;
+}
+
+body {
+  background-color: var(--background-color);
+}
+
+#barra {
+  background-color: var(--bar-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+#buttonsContainer {
+  display: flex;
+}
+
+#logo-container {
+  display: flex;
+  align-items: center;
+}
+
+#fotologo {
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+  filter: invert(1);
+}
+
+#titulo {
+  color: var(--title-color);
+  font-size: 30px;
+  font-weight: bold;
+  font-family: "Moderustic", sans-serif;
+}
+
+#botones-container {
+  display: flex;
+  align-items: center;
+}
+
+#btn-desktop{
+  display: none;
+}
+
+
+#modo-oscuro {
+  width: 50px;
+  height: 50px;
+  background-color: var(--dark-mode-color);
+  background-image: url('src/assets/luna.png');
+  background-size: cover;
+  background-position: center;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+#modo-oscuro.light-mode {
+  background-image: url('src/assets/sol.png');
+}
+
+#modo-oscuro:hover {
+  background-color: var(--dark-mode-hover);
+}
+
+.section {
+  min-width: 100%;
+}
+
+h1 {
+  font-family: "Moderustic", sans-serif;
+  font-size: 36px;
+  font-weight: bold;
   text-align: center;
+  margin: 0;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.title {
+  color: var(--font-color);
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+.subtitle {
+  color: var(--font-color);
+  margin-top: 0;
+}
+
+.column {
+  height: 100%;
+}
+
+.box {
+  background-color: var(--light-background);
+  border: 2px solid var(--primary-color);
+  border-radius: 8px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: center;
+  min-height: 500px;
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.task {
+  padding: 10px;
+  text-align: left;
+  background-color: var(--very-light-background);
+  border-radius: 8px;
+  width: 100%;
+  margin-bottom: 20px;
+  position: relative;
+
+}
+
+#add-task-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: var(--create-task-button);
+  color: var(--title-color);
+  font-size: 30px;
+  border: none;
+  cursor: pointer;
+  outline: none;
+}
+
+#add-task-btn:hover {
+  background-color: var(--create-task-hover);
+}
+
+::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}
+
+.modal-card-foot {
+  display: flex;
+  justify-content: space-between;
+}
+
+#cancel-task-btn {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.task-title,
+.task-assigned,
+.task-priority,
+.task-due-date,
+.task-description {
+  color: var(--font-color)
+}
+
+
+
+#save-task-btn {
+  background-color: var(--create-task-button);
+  color: var(--title-color);
+}
+
+#save-task-btn:hover {
+  background-color: var(--create-task-hover);
+}
+
+.modal-card-foot .button {
+  margin-right: 40px;
+}
+
+.deleteButton {
+  width: 35px;
+  height: 35px;
+  background-color: var(--delete-btn-color);
+  background-image: url('src/assets/basurero.png');
+  background-size: cover;
+  background-position: center;
+  border-radius: 8px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.deleteButton:hover{
+  background-color: var(--delete-btn-hover);
+}
+
+.drag-over{
+  background-color: var(--drag-over-background);
+  border: 4px dashed var(--drag-over-border);
+}
+
+
+/* Estilo para pantallas medianas: wrap de columnas */
+@media (min-width: 768px) {
+  #add-task-btn {
+      display: none;
   }
-  to {
-    transform: rotate(360deg);
+
+  #btn-desktop {
+      display: block;
+      background-color: var(--create-task-button);
+      color: var(--title-color);
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-left: 10px;
+  }
+
+  #btn-desktop:hover {
+      background-color: var(--create-task-hover);
+  }
+
+  .columns-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+  }
+
+  .column {
+      flex: 1 0 calc(33.333% - 20px);
+      min-width: 300px;
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+@media (min-width: 1440px) {
+
+  .container {
+      min-width: 90vw;
+      min-height: 100vh;
   }
-}
 
-.card {
-  padding: 2em;
-}
+  .columns-container {
+      display: flex;
+      flex-wrap: nowrap;
+      overflow-x: scroll;
+      scroll-snap-type: x mandatory;
+      width: 100%;
+      padding-bottom: 20px;
+      margin: 20px;
+      justify-content: flex-start;
+  }
 
-.read-the-docs {
-  color: #888;
+  .column {
+      min-width: calc(100% / 3);
+      scroll-snap-align: end;
+      margin: 0;
+      box-sizing: border-box;
+  }
 }

@@ -11,7 +11,7 @@ const Dropdown = ({ id, options, required }) => {
         ))}
       </select>
     </div>
-  )
+  );
 };
 
 export default Dropdown;

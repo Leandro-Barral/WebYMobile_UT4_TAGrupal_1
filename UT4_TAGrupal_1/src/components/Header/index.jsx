@@ -6,7 +6,7 @@ const Header = () => {
     return (
         <div id="barra">
             <div id="logo-container">
-                <img id="fotologo" src="task.png" alt="Logo"></img>
+                <img id="fotologo" src="src\assets\task.png" alt="Logo"></img>
                 <div id="titulo">Gestor de Tareas</div>
             </div>
             <div id="buttonsContainer">
