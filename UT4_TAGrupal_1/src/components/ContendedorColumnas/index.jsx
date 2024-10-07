@@ -7,15 +7,16 @@ const ContenedorColumnas = ({ onTaskClick }) => {
   const [tasks, setTasks] = useState([]); // Aquí almacenamos las tareas
 
   // Cargar tareas cuando el componente se monta
+  const fetchTasks = async () => {
+    const tasksFromBackend = await getTasks();
+    setTasks(tasksFromBackend);
+  };
+
+  // Cargar tareas cuando el componente se monta
   useEffect(() => {
-    const fetchTasks = async () => {
-      const tasksFromBackend = await getTasks();
-      setTasks(tasksFromBackend);
-    };
     fetchTasks();
   }, []);
 
-  // Filtrar las tareas por su estado y pasarlas a las columnas correspondientes
   const getTasksByStatus = (status) => {
     return tasks.filter((task) => task.status.trim().toLowerCase() === status.trim().toLowerCase());
   };
@@ -24,28 +25,28 @@ const ContenedorColumnas = ({ onTaskClick }) => {
   return (
     <div className="columns-container">
       <Columna title="Backlog">
-        {tasks.filter(task => task.status === 'Backlog').map(task => (
-          <Tarea key={task.id} task={task} onClick={() => onTaskClick(task)} />
+        {getTasksByStatus("Backlog").map(task => (
+          <Tarea key={task.id} task={task} renderTasks={fetchTasks} onClick={() => onTaskClick(task)}/>
         ))}
       </Columna>
       <Columna title="To Do">
-        {tasks.filter(task => task.status === 'To Do').map(task => (
-          <Tarea key={task.id} task={task} onClick={() => onTaskClick(task)} />
+        {getTasksByStatus("To Do").map(task => (
+          <Tarea key={task.id} task={task} renderTasks={fetchTasks} onClick={() => onTaskClick(task)}/>
         ))}
       </Columna>
       <Columna title="In Progress">
-        {tasks.filter(task => task.status === 'In Progress').map(task => (
-          <Tarea key={task.id} task={task} onClick={() => onTaskClick(task)} />
+        {getTasksByStatus("In Progress").map(task => (
+          <Tarea key={task.id} task={task} renderTasks={fetchTasks} onClick={() => onTaskClick(task)}/>
         ))}
       </Columna>
       <Columna title="Blocked">
-        {tasks.filter(task => task.status === 'Blocked').map(task => (
-          <Tarea key={task.id} task={task} onClick={() => onTaskClick(task)} />
+        {getTasksByStatus("Blocked").map(task => (
+          <Tarea key={task.id} task={task} renderTasks={fetchTasks} onClick={() => onTaskClick(task)}/>
         ))}
       </Columna>
       <Columna title="Done">
-        {tasks.filter(task => task.status === 'Done').map(task => (
-          <Tarea key={task.id} task={task} onClick={() => onTaskClick(task)} />
+        {getTasksByStatus("Done").map(task => (
+          <Tarea key={task.id} task={task} renderTasks={fetchTasks} onClick={() => onTaskClick(task)}/>
         ))}
       </Columna>
     </div>

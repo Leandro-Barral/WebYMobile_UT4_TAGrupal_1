@@ -10,9 +10,13 @@ const ModoOscuro = ({ toggleDarkMode, isDarkMode }) => {
             onClick={toggleDarkMode}
             className="button is-light"
         >
-            {isDarkMode ? "" : ""}
+            <img
+                src={isDarkMode ? 'src/assets/sol.png' : 'src/assets/luna.png'}
+                alt={isDarkMode ? 'Modo Claro' : 'Modo Oscuro'}
+            />
         </button>
     );
 };
 
 export default ModoOscuro;
+

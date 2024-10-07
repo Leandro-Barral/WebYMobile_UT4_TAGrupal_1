@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import Boton from '../Boton';
 import Input from '../Input';
 import Dropdown from '../Dropdown';
+import { postTask, putTask } from '../../taskService.jsx';
+
 
 const Modal = ({ isOpen, onClose, task }) => {
     // Estados para almacenar los valores de los campos
@@ -32,27 +34,25 @@ const Modal = ({ isOpen, onClose, task }) => {
         }
     }, [task]);  // Se ejecuta cuando `task` cambia
 
-    const handleSave = (event) => {
-        event.preventDefault();
+    const handleSave = async () => {
         const taskData = {
-            title,
-            description,
-            assignedTo,
-            priority,
-            dueDate
+            title: title,
+            description: description,
+            status: status,
+            assignedTo: assignedTo,
+            priority: priority,
+            dueDate: dueDate,
         };
-        
-        // Aquí puedes manejar la lógica para guardar o actualizar la tarea
+
         if (task) {
-            // Si `task` no es null, estamos editando una tarea existente
-            console.log('Editando tarea:', taskData);
+            // Editar tarea existente
+            await putTask(taskData);
         } else {
-            // Si `task` es null, estamos creando una nueva tarea
-            console.log('Creando nueva tarea:', taskData);
+            // Crear nueva tarea
+            await postTask(taskData);
         }
 
-        // Cerrar el modal después de guardar
-        onClose();
+        onClose(); // Cierra el modal
     };
 
     return (
@@ -65,67 +65,68 @@ const Modal = ({ isOpen, onClose, task }) => {
                 </header>
                 <section className="modal-card-body">
                     <form id="task-form" onSubmit={handleSave}> {/* Guardar al hacer submit */}
-                        <Input 
-                            id="task-title" 
-                            label="Título *" 
-                            placeholder="Título de la tarea" 
-                            required 
-                            type="text" 
-                            value={task ? task.title : ''} 
+                        <Input
+                            id="task-title"
+                            label="Título *"
+                            placeholder="Título de la tarea"
+                            required
+                            type="text"
+                            value={task ? task.title : ''}
                             onChange={(e) => setTitle(e.target.value)}  // Actualizar el estado
                         />
-                        <Input 
-                            id="task-description" 
-                            label="Descripción" 
-                            placeholder="Descripción de la tarea" 
-                            required 
-                            type="textarea" 
-                            value={task ? task.description: ''} 
+                        <Input
+                            id="task-description"
+                            label="Descripción"
+                            placeholder="Descripción de la tarea"
+                            required
+                            type="textarea"
+                            value={task ? task.description : ''}
                             onChange={(e) => setDescription(e.target.value)}
                         />
-                        <Dropdown 
-                            id="task-assigned" 
-                            options={[{ value: 'Asignado 1', label: 'Asignado 1' }, { value: 'Asignado 2', label: 'Asignado 2' }, { value: 'Asignado 3', label: 'Asignado 3' }]} 
-                            required 
+                        <Dropdown
+                            id="task-assigned"
+                            options={[{ value: 'Asignado 1', label: 'Asignado 1' }, { value: 'Asignado 2', label: 'Asignado 2' }, { value: 'Asignado 3', label: 'Asignado 3' }]}
+                            required
                             value={task ? task.assignedTo : ''}
-                            onChange={(e) => setAssignedTo(e.target.value)} 
+                            onChange={(e) => setAssignedTo(e.target.value)}
                         />
-                        <Dropdown 
-                            id="task-priority" 
-                            options={[{ value: 'Alta', label: 'Alta' }, { value: 'Media', label: 'Media' }, { value: 'Baja', label: 'Baja' }]} 
-                            required 
+                        <Dropdown
+                            id="task-priority"
+                            options={[{ value: 'Alta', label: 'Alta' }, { value: 'Media', label: 'Media' }, { value: 'Baja', label: 'Baja' }]}
+                            required
                             value={task ? task.priority : ''}
-                            onChange={(e) => setPriority(e.target.value)} 
+                            onChange={(e) => setPriority(e.target.value)}
                         />
-                        <Input 
-                            id="task-due-date" 
-                            label="Fecha límite" 
-                            required 
-                            type="date" 
-                            value={task ? task.dueDate : ''} 
+                        <Input
+                            id="task-due-date"
+                            label="Fecha límite"
+                            required
+                            type="date"
+                            value={task ? task.dueDate : ''}
                             onChange={(e) => setDueDate(e.target.value)}
                         />
-                        <Boton 
-                            id="save-task-btn" 
-                            className="button is-success" 
-                            type="submit"
-                        >
-                            {task ? 'Guardar Cambios' : 'Guardar'}
-                        </Boton>
+
                     </form>
                 </section>
                 <footer className="modal-card-foot">
-                    <Boton 
-                        id="cancel-task-btn" 
-                        className="button" 
+                    <Boton
+                        id="cancel-task-btn"
+                        className="button"
                         onClick={onClose}
                     >
                         Cancelar
                     </Boton>
+                    <Boton
+                        id="save-task-btn"
+                        className="button is-success"
+                        type="submit"
+                    >
+                        {task ? 'Guardar Cambios' : 'Guardar'}
+                    </Boton>
                 </footer>
             </div>
         </div>
-    )
+    );
 };
 
 export default Modal;
