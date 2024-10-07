@@ -10,6 +10,10 @@ import Boton from './components/Boton';
 import ModoOscuro from './components/ModoOscuro';
 
 const App = () => {
+  let tasks = [];
+
+  
+
   const [count, setCount] = useState(0)
   const [isModalOpen, setIsModalOpen] = useState(false);
 
