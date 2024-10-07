@@ -5,7 +5,7 @@ const Tarea = ({ task, onClick, RenderTasks }) => {
   const handleDelete = async (event) => {
     event.stopPropagation();
     await deleteTask(task);
-    renderTasks();
+    RenderTasks();
   };
 
   return (
