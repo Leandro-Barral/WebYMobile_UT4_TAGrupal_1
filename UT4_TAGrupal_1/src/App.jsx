@@ -33,7 +33,8 @@ const App = () => {
         <div className="container">
           <Header 
             toggleDarkMode={toggleDarkMode} 
-            isDarkMode={isDarkMode} 
+            isDarkMode={isDarkMode}
+            onButtonClick={handleOpenModal} 
           />
           <ContenedorColumnas />
           <Boton

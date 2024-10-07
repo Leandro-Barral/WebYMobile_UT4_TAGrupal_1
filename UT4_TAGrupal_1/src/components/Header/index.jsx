@@ -3,7 +3,7 @@ import React from "react";
 import Boton from "../Boton";
 import ModoOscuro from "../ModoOscuro";
 
-const Header = ({ toggleDarkMode, isDarkMode }) => {
+const Header = ({ toggleDarkMode, isDarkMode, onButtonClick }) => {
     return (
         <div id="barra">
             <div id="logo-container">
@@ -11,7 +11,7 @@ const Header = ({ toggleDarkMode, isDarkMode }) => {
                 <div id="titulo">Gestor de Tareas</div>
             </div>
             <div id="buttonsContainer">
-                <Boton id="btn-desktop" className="button is-rounded">
+                <Boton id="btn-desktop" className="button is-rounded" onClick={onButtonClick}>
                     Agregar Tarea
                 </Boton>
                 <ModoOscuro 
