@@ -7,15 +7,16 @@ const ContenedorColumnas = () => {
   const [tasks, setTasks] = useState([]); // Aquí almacenamos las tareas
 
   // Cargar tareas cuando el componente se monta
+  const fetchTasks = async () => {
+    const tasksFromBackend = await getTasks();
+    setTasks(tasksFromBackend);
+  };
+
+  // Cargar tareas cuando el componente se monta
   useEffect(() => {
-    const fetchTasks = async () => {
-      const tasksFromBackend = await getTasks();
-      setTasks(tasksFromBackend);
-    };
     fetchTasks();
   }, []);
 
-  // Filtrar las tareas por su estado y pasarlas a las columnas correspondientes
   const getTasksByStatus = (status) => {
     return tasks.filter((task) => task.status.trim().toLowerCase() === status.trim().toLowerCase());
   };
@@ -24,27 +25,27 @@ const ContenedorColumnas = () => {
     <div className="columns-container">
       <Columna title="Backlog">
         {getTasksByStatus("Backlog").map(task => (
-          <Tarea key={task.id} task={task} />
+          <Tarea key={task.id} task={task} renderTasks={fetchTasks}/>
         ))}
       </Columna>
       <Columna title="To Do">
         {getTasksByStatus("To Do").map(task => (
-          <Tarea key={task.id} task={task} />
+          <Tarea key={task.id} task={task} renderTasks={fetchTasks}/>
         ))}
       </Columna>
       <Columna title="In Progress">
         {getTasksByStatus("In Progress").map(task => (
-          <Tarea key={task.id} task={task} />
+          <Tarea key={task.id} task={task} renderTasks={fetchTasks}/>
         ))}
       </Columna>
       <Columna title="Blocked">
         {getTasksByStatus("Blocked").map(task => (
-          <Tarea key={task.id} task={task} />
+          <Tarea key={task.id} task={task} renderTasks={fetchTasks}/>
         ))}
       </Columna>
       <Columna title="Done">
         {getTasksByStatus("Done").map(task => (
-          <Tarea key={task.id} task={task} />
+          <Tarea key={task.id} task={task} renderTasks={fetchTasks}/>
         ))}
       </Columna>
     </div>
