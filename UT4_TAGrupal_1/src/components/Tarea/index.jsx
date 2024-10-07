@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Tarea = ({ task }) => {
+const Tarea = ({ task, onClick }) => {
   const handleDelete = async (event) => {
     event.stopPropagation();
     await deleteTask(task);
@@ -11,7 +11,7 @@ const Tarea = ({ task }) => {
       className="task" 
       draggable="true" 
       onDragStart={() => {/* Aquí manejas el evento de dragstart */}} 
-      onClick={() => openTaskModalForEditing(task.id, task)}
+      onClick={onClick}
     >
       <div className="task-title">{task.title}</div>
       <p className="task-description">Descripción: {task.description}</p>
@@ -24,3 +24,4 @@ const Tarea = ({ task }) => {
 };
 
 export default Tarea;
+

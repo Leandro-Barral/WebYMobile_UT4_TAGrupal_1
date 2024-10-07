@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Input = ({ id, label, type = 'text', placeholder, required }) => {
+const Input = ({ id, label, value, type = 'text', placeholder, required }) => {
 
     return (
         <div className="field">
@@ -12,6 +12,7 @@ const Input = ({ id, label, type = 'text', placeholder, required }) => {
                         className="textarea"
                         placeholder={placeholder}
                         required={required}
+                        value={value}
                     />
                 ) : (
                     <input
@@ -20,6 +21,7 @@ const Input = ({ id, label, type = 'text', placeholder, required }) => {
                         type={type}
                         placeholder={placeholder}
                         required={required}
+                        value={value}
                     />
                 )}
             </div>

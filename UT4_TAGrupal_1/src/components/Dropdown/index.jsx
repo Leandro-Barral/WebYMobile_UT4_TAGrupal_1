@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Dropdown = ({ id, options, required }) => {
+const Dropdown = ({ id, value, options, required }) => {
   return (
     <div className="select">
       <select id={id} required={required}>

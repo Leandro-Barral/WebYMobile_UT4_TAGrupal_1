@@ -8,24 +8,31 @@ import Boton from './components/Boton';
 const App = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedTask, setSelectedTask] = useState(null);
 
   useEffect(() => {
-    // Cargar la preferencia del tema desde localStorage al montar el componente
     const savedTheme = localStorage.getItem('dark-mode') === 'true';
     setIsDarkMode(savedTheme);
     document.body.classList.toggle('dark-mode', savedTheme);
   }, []);
 
   const toggleDarkMode = () => {
-    // Alternar entre modo claro y oscuro
     const newMode = !isDarkMode;
     setIsDarkMode(newMode);
     document.body.classList.toggle('dark-mode', newMode);
-    localStorage.setItem('dark-mode', newMode);  // Guardar preferencia en localStorage
+    localStorage.setItem('dark-mode', newMode);
   };
 
-  const handleOpenModal = () => setIsModalOpen(true);
-  const handleCloseModal = () => setIsModalOpen(false);
+  const handleOpenModal = (task = null) => {
+    console.log("Tarea seleccionada para editar:", task);
+    setSelectedTask(task);
+    setIsModalOpen(true);
+};
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setSelectedTask(null); 
+  };
 
   return (
     <div className="App">
@@ -34,21 +41,22 @@ const App = () => {
           <Header 
             toggleDarkMode={toggleDarkMode} 
             isDarkMode={isDarkMode}
-            onButtonClick={handleOpenModal} 
+            onButtonClick={() => handleOpenModal()}
           />
-          <ContenedorColumnas />
+          <ContenedorColumnas onTaskClick={handleOpenModal} /> 
           <Boton
             id="add-task-btn"
             className="button is-success is-fullwidth"
-            onClick={handleOpenModal}
+            onClick={() => handleOpenModal()}  
           >
             +
           </Boton>
         </div>
       </section>
-      <Modal isOpen={isModalOpen} onClose={handleCloseModal} />
+      <Modal isOpen={isModalOpen} onClose={handleCloseModal} task={selectedTask} /> 
     </div>
-  );
+  );  
 };
 
 export default App;
+

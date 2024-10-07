@@ -3,7 +3,7 @@ import Columna from '../Columna';
 import Tarea from '../Tarea';
 import { getTasks } from '../../taskService';
 
-const ContenedorColumnas = () => {
+const ContenedorColumnas = ({ onTaskClick }) => {
   const [tasks, setTasks] = useState([]); // Aquí almacenamos las tareas
 
   // Cargar tareas cuando el componente se monta
@@ -20,31 +20,32 @@ const ContenedorColumnas = () => {
     return tasks.filter((task) => task.status.trim().toLowerCase() === status.trim().toLowerCase());
   };
 
+  
   return (
     <div className="columns-container">
       <Columna title="Backlog">
-        {getTasksByStatus("Backlog").map(task => (
-          <Tarea key={task.id} task={task} />
+        {tasks.filter(task => task.status === 'Backlog').map(task => (
+          <Tarea key={task.id} task={task} onClick={() => onTaskClick(task)} />
         ))}
       </Columna>
       <Columna title="To Do">
-        {getTasksByStatus("To Do").map(task => (
-          <Tarea key={task.id} task={task} />
+        {tasks.filter(task => task.status === 'To Do').map(task => (
+          <Tarea key={task.id} task={task} onClick={() => onTaskClick(task)} />
         ))}
       </Columna>
       <Columna title="In Progress">
-        {getTasksByStatus("In Progress").map(task => (
-          <Tarea key={task.id} task={task} />
+        {tasks.filter(task => task.status === 'In Progress').map(task => (
+          <Tarea key={task.id} task={task} onClick={() => onTaskClick(task)} />
         ))}
       </Columna>
       <Columna title="Blocked">
-        {getTasksByStatus("Blocked").map(task => (
-          <Tarea key={task.id} task={task} />
+        {tasks.filter(task => task.status === 'Blocked').map(task => (
+          <Tarea key={task.id} task={task} onClick={() => onTaskClick(task)} />
         ))}
       </Columna>
       <Columna title="Done">
-        {getTasksByStatus("Done").map(task => (
-          <Tarea key={task.id} task={task} />
+        {tasks.filter(task => task.status === 'Done').map(task => (
+          <Tarea key={task.id} task={task} onClick={() => onTaskClick(task)} />
         ))}
       </Columna>
     </div>
