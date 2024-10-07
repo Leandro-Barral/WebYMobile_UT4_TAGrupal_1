@@ -1,4 +1,4 @@
-:root{
+:root {
   --bar-color: rgb(12, 64, 12);
   --title-color: white;
   --background-color: #e8e8e8;
@@ -59,10 +59,9 @@ body {
   align-items: center;
 }
 
-#btn-desktop{
+#btn-desktop {
   display: none;
 }
-
 
 #modo-oscuro {
   width: 50px;
@@ -132,7 +131,6 @@ h1 {
   width: 100%;
   margin-bottom: 20px;
   position: relative;
-
 }
 
 #add-task-btn {
@@ -173,10 +171,8 @@ h1 {
 .task-priority,
 .task-due-date,
 .task-description {
-  color: var(--font-color)
+  color: var(--font-color);
 }
-
-
 
 #save-task-btn {
   background-color: var(--create-task-button);
@@ -204,71 +200,94 @@ h1 {
   right: 10px;
 }
 
-.deleteButton:hover{
+.deleteButton:hover {
   background-color: var(--delete-btn-hover);
 }
 
-.drag-over{
+.drag-over {
   background-color: var(--drag-over-background);
   border: 4px dashed var(--drag-over-border);
 }
 
-
 /* Estilo para pantallas medianas: wrap de columnas */
 @media (min-width: 768px) {
   #add-task-btn {
-      display: none;
+    display: none;
   }
 
   #btn-desktop {
-      display: block;
-      background-color: var(--create-task-button);
-      color: var(--title-color);
-      padding: 10px 20px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      margin-left: 10px;
+    display: block;
+    background-color: var(--create-task-button);
+    color: var(--title-color);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-left: 10px;
   }
 
   #btn-desktop:hover {
-      background-color: var(--create-task-hover);
+    background-color: var(--create-task-hover);
   }
 
   .columns-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
   }
 
   .column {
-      flex: 1 0 calc(33.333% - 20px);
-      min-width: 300px;
+    flex: 1 0 calc(33.333% - 20px);
+    min-width: 300px;
   }
 }
 
 @media (min-width: 1440px) {
-
   .container {
-      min-width: 90vw;
-      min-height: 100vh;
+    min-width: 90vw;
+    min-height: 100vh;
   }
 
   .columns-container {
-      display: flex;
-      flex-wrap: nowrap;
-      overflow-x: scroll;
-      scroll-snap-type: x mandatory;
-      width: 100%;
-      padding-bottom: 20px;
-      margin: 20px;
-      justify-content: flex-start;
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
+    width: 100%;
+    padding-bottom: 20px;
+    margin: 20px;
+    justify-content: flex-start;
   }
 
   .column {
-      min-width: calc(100% / 3);
-      scroll-snap-align: end;
-      margin: 0;
-      box-sizing: border-box;
+    min-width: calc(100% / 3);
+    scroll-snap-align: end;
+    margin: 0;
+    box-sizing: border-box;
   }
 }
+
+body {
+  background-color: var(--background-color, #e8e8e8);
+  color: var(--font-color, black);
+}
+
+body.dark-mode {
+  --background-color: #121212;
+  --font-color: #e0e0e0;
+  --bar-color: #333;
+  --title-color: #fff;
+  --primary-color: #bb86fc;
+  --light-background: #1f1f1f;
+  --very-light-background: #292929;
+  --create-task-button: #03dac6;
+  --create-task-hover: #018786;
+  --dark-mode-color: #333;
+  --dark-mode-hover: #444;
+  --delete-btn-color: #888;
+  --delete-btn-hover: #e53935;
+
+  background-color: var(--background-color);
+  color: var(--font-color);
+}
+
