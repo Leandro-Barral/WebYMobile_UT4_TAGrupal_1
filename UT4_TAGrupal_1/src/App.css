@@ -169,7 +169,8 @@ h1 {
 .task-assigned,
 .task-priority,
 .task-due-date,
-.task-description {
+.task-description,
+.task-status {
   color: var(--font-color);
 }
 
