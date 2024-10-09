@@ -1,11 +1,11 @@
 import React from 'react';
 import { deleteTask } from '../../taskService';
 
-const Tarea = ({ task, onClick, RenderTasks }) => {
+const Tarea = ({ task, onClick, renderTasks }) => {
   const handleDelete = async (event) => {
     event.stopPropagation();
     await deleteTask(task);
-    RenderTasks();
+    renderTasks();
   };
 
   return (

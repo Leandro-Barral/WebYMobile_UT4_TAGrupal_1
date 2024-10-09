@@ -27,35 +27,35 @@ const App = () => {
     console.log("Tarea seleccionada para editar:", task);
     setSelectedTask(task);
     setIsModalOpen(true);
-};
+  };
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
-    setSelectedTask(null); 
+    setSelectedTask(null);
   };
 
   return (
     <div className="App">
       <section className="section">
         <div className="container">
-          <Header 
-            toggleDarkMode={toggleDarkMode} 
+          <Header
+            toggleDarkMode={toggleDarkMode}
             isDarkMode={isDarkMode}
             onButtonClick={() => handleOpenModal()}
           />
-          <ContenedorColumnas onTaskClick={handleOpenModal} /> 
+          <ContenedorColumnas onTaskClick={handleOpenModal} />
           <Boton
             id="add-task-btn"
             className="button is-success is-fullwidth"
-            onClick={() => handleOpenModal()}  
+            onClick={() => handleOpenModal()}
           >
             +
           </Boton>
         </div>
       </section>
-      <Modal isOpen={isModalOpen} onClose={handleCloseModal} task={selectedTask} /> 
+      <Modal isOpen={isModalOpen} onClose={handleCloseModal} task={selectedTask} />
     </div>
-  );  
+  );
 };
 
 export default App;

@@ -11,6 +11,7 @@ const Modal = ({ isOpen, onClose, task }) => {
     const [description, setDescription] = useState('');
     const [assignedTo, setAssignedTo] = useState('');
     const [priority, setPriority] = useState('');
+    const [status, setStatus] = useState('');
     const [dueDate, setDueDate] = useState('');
 
     console.log(task)
@@ -23,6 +24,7 @@ const Modal = ({ isOpen, onClose, task }) => {
             setDescription(task.description);
             setAssignedTo(task.assignedTo);
             setPriority(task.priority);
+            setStatus(task.status);
             setDueDate(task.dueDate);
         } else {
             // Si no hay tarea, limpiamos los campos (para nueva tarea)
@@ -30,29 +32,42 @@ const Modal = ({ isOpen, onClose, task }) => {
             setDescription('');
             setAssignedTo('');
             setPriority('');
+            setStatus('');
             setDueDate('');
         }
     }, [task]);  // Se ejecuta cuando `task` cambia
 
     const handleSave = async () => {
-        const taskData = {
-            title: title,
-            description: description,
-            status: status,
-            assignedTo: assignedTo,
-            priority: priority,
-            dueDate: dueDate,
-        };
+        
+        const possiblesStatus = ["Backlog", "To Do", "In Progress", "Blocked", "Done"];
+        const members = ["Asignado 1", "Asignado 2", "Asignado 3"];
+        const priorities = ["Prioridad Baja", "Prioridad Media", "Prioridad Alta"];
 
-        if (task) {
-            // Editar tarea existente
-            await putTask(taskData);
-        } else {
-            // Crear nueva tarea
-            await postTask(taskData);
+        if (!(title == '' || description == '' || !possiblesStatus.includes(status) || !members.includes(assignedTo) || !priorities.includes(priority) || dueDate == '')){
+            const taskData = {
+                title: title,
+                description: description,
+                status: status,
+                assignedTo: assignedTo,
+                priority: priority,
+                endDate: dueDate
+            };
+    
+            if (task) {
+                // Editar tarea existente
+                taskData.id = task.id;
+                await putTask(taskData);
+            } else {
+                // Crear nueva tarea
+                await postTask(taskData);
+            }
+
+            onClose(); // Cierra el modal
         }
-
-        onClose(); // Cierra el modal
+        else
+        {
+            alert("Hay campos sin valores o con valores inválidos");
+        }
     };
 
     return (
@@ -60,18 +75,18 @@ const Modal = ({ isOpen, onClose, task }) => {
             <div className="modal-background" onClick={onClose}></div>
             <div className="modal-card">
                 <header className="modal-card-head">
-                    <p className="modal-card-title">{task ? 'Editar Tarea' : 'Nueva Tarea'}</p> {/* Título dinámico */}
+                    <p className="modal-card-title">{task ? 'Editar Tarea' : 'Nueva Tarea'}</p>
                     <button className="delete" aria-label="close" onClick={onClose}></button>
                 </header>
                 <section className="modal-card-body">
-                    <form id="task-form" onSubmit={handleSave}> {/* Guardar al hacer submit */}
+                    <form id="task-form" onSubmit={handleSave}>
                         <Input
                             id="task-title"
                             label="Título *"
                             placeholder="Título de la tarea"
                             required
                             type="text"
-                            value={task ? task.title : ''}
+                            value={title}
                             onChange={(e) => setTitle(e.target.value)}  // Actualizar el estado
                         />
                         <Input
@@ -80,29 +95,36 @@ const Modal = ({ isOpen, onClose, task }) => {
                             placeholder="Descripción de la tarea"
                             required
                             type="textarea"
-                            value={task ? task.description : ''}
+                            value={description}
                             onChange={(e) => setDescription(e.target.value)}
                         />
                         <Dropdown
                             id="task-assigned"
                             options={[{ value: 'Asignado 1', label: 'Asignado 1' }, { value: 'Asignado 2', label: 'Asignado 2' }, { value: 'Asignado 3', label: 'Asignado 3' }]}
                             required
-                            value={task ? task.assignedTo : ''}
+                            value={assignedTo}
                             onChange={(e) => setAssignedTo(e.target.value)}
                         />
                         <Dropdown
                             id="task-priority"
-                            options={[{ value: 'Alta', label: 'Alta' }, { value: 'Media', label: 'Media' }, { value: 'Baja', label: 'Baja' }]}
+                            options={[{ value: 'Prioridad Alta', label: 'Prioridad Alta' }, { value: 'Prioridad Media', label: 'Prioridad Media' }, { value: 'Prioridad Baja', label: 'Prioridad Baja' }]}
                             required
-                            value={task ? task.priority : ''}
+                            value={priority}
                             onChange={(e) => setPriority(e.target.value)}
+                        />
+                        <Dropdown
+                            id="task-status"
+                            options={[{value: 'Backlog', label: 'Backlog'}, {value: 'To Do', label: 'To Do'}, {value: 'In Progress', label: 'In Progress'}, {value: 'Blocked', label: 'Blocked'}, {value: 'Done', label: 'Done'}]}
+                            required
+                            value={status}
+                            onChange={(e) => setStatus(e.target.value)}
                         />
                         <Input
                             id="task-due-date"
                             label="Fecha límite"
                             required
                             type="date"
-                            value={task ? task.dueDate : ''}
+                            value={dueDate}
                             onChange={(e) => setDueDate(e.target.value)}
                         />
 
@@ -120,6 +142,7 @@ const Modal = ({ isOpen, onClose, task }) => {
                         id="save-task-btn"
                         className="button is-success"
                         type="submit"
+                        onClick={handleSave}
                     >
                         {task ? 'Guardar Cambios' : 'Guardar'}
                     </Boton>

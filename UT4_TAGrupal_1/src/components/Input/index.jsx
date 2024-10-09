@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
-const Input = ({ id, label, value, type = 'text', placeholder, required }) => {
+const Input = ({ id, label, value, type = 'text', placeholder, required, onChange }) => {
 
     return (
         <div className="field">
@@ -13,6 +13,7 @@ const Input = ({ id, label, value, type = 'text', placeholder, required }) => {
                         placeholder={placeholder}
                         required={required}
                         value={value}
+                        onChange={onChange}
                     />
                 ) : (
                     <input
@@ -22,6 +23,7 @@ const Input = ({ id, label, value, type = 'text', placeholder, required }) => {
                         placeholder={placeholder}
                         required={required}
                         value={value}
+                        onChange={onChange}
                     />
                 )}
             </div>
